@@ -15,30 +15,42 @@
 
  ?>
 
- <!DOCTYPE html>
- <html>
- <head>
- 	<title>LAB-1</title>
- </head>
- <body>
- 
- 	<a href="index.php">View All Users</a>
+ <?php require_once('layout.php') ?>
 
- 	<form action="create_user.php" method="POST">
+ <div class="row p-0 m-0">
+
+ 	<div class="col-md-12 ">
+ 		<a href="index.php"><button class="btn btn-primary float-right m-3 p-2">View All Users</button></a>
+ 	</div>
+ 	
+ </div>
+ 
+ <div class="row p-0 m-0 bg-white justify-content-center m-2">
+ 	<div class="col-md-10">
+ 		
+ 		<form action="create_user.php" method="POST" class="form jumbotron p-2 m-2">
+
+
+
  		<label>FIRST NAME</label>
- 		<input type="text" name="fname">
+ 		<input type="text" name="fname" class="form-control">
  		<br>
  		<label>LAST NAME</label>
- 		<input type="text" name="lname">
+ 		<input type="text" name="lname" class="form-control">
  		<br>
  		<label>CITY</label>
- 		<input type="text" name="city">
+ 		<input type="text" name="city" class="form-control">
 
  		<br>
 
- 		<input type="submit" name="submit" value="Insert">
+ 		<input type="submit" name="submit" value="Insert" class="btn btn-primary p-2">
 
  	</form>
 
+
+ 	</div>
+ </div>
+
+ 	
  </body>
  </html>

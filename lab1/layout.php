@@ -11,4 +11,4 @@
 	<title>LABS-1</title>
 
 </head>
-<body>
+<body class="p-0 m-0 jumbotron">

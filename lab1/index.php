@@ -10,9 +10,18 @@
 
  <?php require_once('layout.php') ?>
 
- 	<button class="btn-primary pl-3 pr-3 text-white float-right m-3 p-3"><a href="create_user.php" class="m-2 text-white">Create New User</a></button>
+
+ <div class="row p-0 m-0">
+ 	<div class="col-md-12">
+ 		<a href="create_user.php"><button class="btn btn-primary p-3 m-2 float-right">Create New User</button></a>
+ 	</div>
+ </div>
+
+ 	
  
- 	<table class="table table-responsive-sm mt-4 p-3">
+<div class="row p-0 m-0 justify-content-center">
+	<div class="col-md-11">
+		<table class="table table-responsive-sm mt-4 p-3 bg-white ">
  		<thead>
  			<th>First Name</th>
  			<th>Last Name</th>
@@ -30,13 +39,13 @@
  				<td>
  					<form method="GET" action="edit.php">
  						<input type="hidden" name="id" value="<?php echo $student->id ?>">
- 						<input type="submit" name="edit" value="EDIT" class="btn-warning pl-3 pr-3 text-white">
+ 						<input type="submit" name="edit" value="EDIT" class="btn btn-warning pl-3 pr-3 text-white">
  					</form>
  				</td>
  				<td>
  					<form method="GET" action="delete.php">
  						<input type="hidden" name="id" value="<?php echo $student->id ?>">
- 						<input type="submit" name="delete" value="DELETE" class="btn-danger pl-3 pr-3 text-white">
+ 						<input type="submit" name="delete" value="DELETE" class="btn btn-danger pl-3 pr-3 text-white">
  					</form>
  				</td>
  			</tr>
@@ -45,6 +54,10 @@
  		</tbody>
  	
  	</table>
+	</div>
+</div>
+
+ 	
 
  </body>
  </html>
