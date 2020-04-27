@@ -49,6 +49,29 @@
 
 		}
 
+		public function isUserExist($username)
+		{
+			$con = $this->connect;
+
+			$sql ="SELECT username FROM student WHERE username=:username";
+
+			try 
+			{
+				$stmt = $con->prepare($sql);
+				$stmt->execute([
+							'username'=>$username
+						]);
+				$data = $stmt->rowCount();
+
+				return $data;
+
+			} 
+			catch (PDOException $e) 
+			{
+				return false;
+			}
+		}
+
 		public function insertUser()
 		{
 			$con = $this->connect;
@@ -59,24 +82,38 @@
 			$username = $this->username;
 			$hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-			try 
-			{
-			
-			$sql = "INSERT INTO student(f_name,l_name,city,username,password)VALUES(:f_name,:l_name,:city,:username,:password)";
-			$stmt = $con->prepare($sql);
-			$stmt->execute([
-					'f_name'=>$f_name,
-					'l_name'=>$l_name,
-					'city'=>$city,
-					'username'=>$username,
-					'password'=>$hash
-			]);
+			$username_check = $this->isUserExist($username);
 
-			return true;
-			} 
-			catch (Exception $e) 
+
+			if ($username_check = 0) 
 			{
-				return false;
+				
+				try 
+					{
+					
+						$sql = "INSERT INTO student(f_name,l_name,city,username,password)VALUES(:f_name,:l_name,:city,:username,:password)";
+						$stmt = $con->prepare($sql);
+						$stmt->execute([
+								'f_name'=>$f_name,
+								'l_name'=>$l_name,
+								'city'=>$city,
+								'username'=>$username,
+								'password'=>$hash
+						]);
+
+						return true;
+					} 
+
+				catch (Exception $e) 
+					{
+						return false;
+					}
+
+			}
+			else
+			{
+
+				echo "Username Already Exists.. Pick Another One";
 			}
 			
 		}
