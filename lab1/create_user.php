@@ -13,10 +13,22 @@
 		$username = $_POST['u_name'];
 		$password = $_POST['password'];
 
-		$crud_object = new Crud;
+		if (empty($fname) || empty($lname) || empty($city) || empty($username) || empty($password)) 
+		{
+			echo '<script type="text/javascript">';
+			echo ' alert("Please Fill All The Fields")';  //not showing an alert box.
+			echo '</script>';
+		} 
+		else 
+		{
+				
+			$crud_object = new Crud;
 
-		$crud_object->getUserData($fname,$lname,$username,$password,$city);
-		$crud_object->insertUser();
+			$crud_object->getUserData($fname,$lname,$username,$password,$city);
+			$crud_object->insertUser();
+			
+		}
+		
 	}
 
  ?>
@@ -34,7 +46,7 @@
  <div class="row p-0 m-0 bg-white justify-content-center m-2">
  	<div class="col-md-10">
  		
- 		<form action="create_user.php" method="POST" class="form jumbotron p-2 m-2">
+ 		<form name="create_user" action="create_user.php" method="POST" class="form jumbotron p-2 m-2" onsubmit="return validateForm()">
 
 
 
@@ -63,6 +75,7 @@
  	</div>
  </div>
 
- 	
+ <script type="text/javascript" src="js/authenticate.js"></script>	
+
  </body>
  </html>

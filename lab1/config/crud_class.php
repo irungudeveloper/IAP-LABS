@@ -104,7 +104,7 @@
 						return true;
 					} 
 
-				catch (Exception $e) 
+				catch (PDOException $e) 
 					{
 						return false;
 					}
