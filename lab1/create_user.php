@@ -2,15 +2,21 @@
 
 	require_once('config/crud_class.php');
 
-	$crud_object = new Crud;
+	
 
 	if (isset($_POST['submit']))
 	{
+
 		$fname = $_POST['fname'];
 		$lname = $_POST['lname'];
 		$city = $_POST['city'];
+		$username = $_POST['u_name'];
+		$password = $_POST['password'];
 
-		$crud_object->insertStudent($fname,$lname,$city);
+		$crud_object = new Crud;
+
+		$crud_object->getUserData($fname,$lname,$username,$password,$city);
+		$crud_object->insertUser();
 	}
 
  ?>
@@ -40,6 +46,12 @@
  		<br>
  		<label>CITY</label>
  		<input type="text" name="city" class="form-control">
+ 		<br>
+ 		<label>USERNAME</label>
+ 		<input type="text" name="u_name" class="form-control">
+ 		<br>
+ 		<label>PASSWORD</label>
+ 		<input type="password" name="password" class="form-control">
 
  		<br>
 

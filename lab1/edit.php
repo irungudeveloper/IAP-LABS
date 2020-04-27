@@ -7,7 +7,9 @@
 	if (isset($_GET['id'])) 
 	{
 		$u_id = $_GET['id'];
-		$data = $crud_object->editStudent($u_id);
+
+    $crud_object->getUserID($u_id);
+		$data = $crud_object->editUser();
 
   ?>
 

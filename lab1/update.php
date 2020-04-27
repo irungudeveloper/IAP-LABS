@@ -13,8 +13,9 @@
 
 		try 
 		{
-		 
-			$crud_object->updateStudent($id,$fname,$lname,$city);
+		 	
+			$crud_object->getUserUpdateData($id,$fname,$lname,$city);
+			$crud_object->updateUser();
 			header("Location:index.php");
 
 		}  

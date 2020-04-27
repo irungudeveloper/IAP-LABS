@@ -10,6 +10,14 @@
 		private $pdo;
 		private $connect;
 
+		private $fname;
+		private $lname;
+		private $username;
+		private $password;
+		private $hash;
+		private $city;
+		private $user_id;
+
 		function __construct()
 		{
 			$this->pdo = new Database;
@@ -17,19 +25,51 @@
 			return $this->connect;
 		}
 
-		public function insertStudent($f_name,$l_name,$city)
+		public function getUserData($fname,$lname,$username,$password,$city)
+		{
+			$this->fname = $fname;
+			$this->lname = $lname;
+			$this->username = $username;
+			$this->password = $password;
+			$this->city = $city;
+		}
+
+		public function getUserID($id)
+		{
+			$this->user_id = $id;
+		}
+
+		public function getUserUpdateData($id,$fname,$lname,$city)
+		{
+
+			$this->fname = $fname;
+			$this->lname = $lname;
+			$this->city = $city;
+			$this->user_id = $id;
+
+		}
+
+		public function insertUser()
 		{
 			$con = $this->connect;
+
+			$f_name = $this->fname;
+			$l_name = $this->lname;
+			$city = $this->city;
+			$username = $this->username;
+			$hash = password_hash($this->password, PASSWORD_DEFAULT);
 
 			try 
 			{
 			
-			$sql = "INSERT INTO student(f_name,l_name,city)VALUES(:f_name,:l_name,:city)";
+			$sql = "INSERT INTO student(f_name,l_name,city,username,password)VALUES(:f_name,:l_name,:city,:username,:password)";
 			$stmt = $con->prepare($sql);
 			$stmt->execute([
 					'f_name'=>$f_name,
 					'l_name'=>$l_name,
-					'city'=>$city
+					'city'=>$city,
+					'username'=>$username,
+					'password'=>$hash
 			]);
 
 			return true;
@@ -61,9 +101,10 @@
 			}
 		}
 
-		public function editStudent($id)
+		public function editUser()
 		{
 			$con = $this->connect;
+			$id = $this->user_id;
 
 			try 
 			{
@@ -86,10 +127,15 @@
 			}
 		}
 
-		public function updateStudent($id,$fname,$lname,$city)
+		public function updateUser()
 		{
 
 			$con = $this->connect;
+
+			$id = $this->user_id;
+			$fname = $this->fname;
+			$lname = $this->lname;
+			$city = $this->city;
 
 			try {
 				
@@ -113,10 +159,11 @@
 
 		}
 
-		public function deleteStudent($id)
+		public function deleteUser()
 		{
 
 			$con = $this->connect;
+			$id = $this->user_id;
 
 			try 
 			{

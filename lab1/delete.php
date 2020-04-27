@@ -8,7 +8,8 @@
 	{
 		$id = $_GET['id'];
 
-		$status = $crud_object->deleteStudent($id);
+		$crud_object->getUserID($id);
+		$status = $crud_object->deleteUser();
 
 		header("Location:index.php");
 	}
