@@ -2,10 +2,11 @@
 
 	require_once('database_class.php');
 	require_once('crud_interface.php');
+	require_once('authenticate.php');
 	/**
 	 * 
 	 */
-	class Crud extends Database implements CrudInterface
+	class Crud extends Database implements CrudInterface,Authenticate
 	{
 		private $pdo;
 		private $connect;
@@ -219,6 +220,38 @@
 				return false;
 			}
 
+		}
+
+		public function loginUserDetails($username,$password)
+		{
+			$this->username = $username;
+			$this->password = $password;
+
+		}
+
+		public function isPasswordCorrect();
+		{
+			$con = $this->con;
+			$username = $this->username;
+			$password = $this->password;
+
+			$sql = "SELECT password FROM student WHERE username=:username";
+
+			try 
+			{
+				$stmt = $con->prepare($sql);
+				$stmt->execute([
+
+						'username'=>$username
+
+				]);
+
+				$result = $stmt->rowCount();
+			} 
+			catch (PDOException $e) 
+			{
+				return false;
+			}
 		}
 
 	}
