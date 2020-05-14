@@ -86,7 +86,7 @@
 			$username_check = $this->isUserExist($username);
 
 
-			if ($username_check = 0) 
+			if ($username_check == 0) 
 			{
 				
 				try 
@@ -229,9 +229,9 @@
 
 		}
 
-		public function isPasswordCorrect();
+		public function loginUser()
 		{
-			$con = $this->con;
+			$con = $this->connect;
 			$username = $this->username;
 			$password = $this->password;
 
@@ -247,6 +247,29 @@
 				]);
 
 				$result = $stmt->rowCount();
+				$data = $stmt->fetchAll();
+
+				if ($result != 0) 
+				{
+					foreach ($data as $dbpassword) 
+					{
+						$hash = $dbpassword->password;
+					}
+
+					if (password_verify($password, $hash)) 
+					{
+						return true;
+					}
+					else
+					{
+						return 403;
+					}
+				}
+				else
+				{
+					return 404;
+				}
+
 			} 
 			catch (PDOException $e) 
 			{
