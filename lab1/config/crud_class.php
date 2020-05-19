@@ -18,6 +18,7 @@
 		private $hash;
 		private $city;
 		private $user_id;
+		private $profile;
 
 		function __construct()
 		{
@@ -26,13 +27,14 @@
 			return $this->connect;
 		}
 
-		public function getUserData($fname,$lname,$username,$password,$city)
+		public function getUserData($fname,$lname,$username,$password,$city,$image)
 		{
 			$this->fname = $fname;
 			$this->lname = $lname;
 			$this->username = $username;
 			$this->password = $password;
 			$this->city = $city;
+			$this->profile = $image;
 		}
 
 		public function getUserID($id)
@@ -82,6 +84,7 @@
 			$city = $this->city;
 			$username = $this->username;
 			$hash = password_hash($this->password, PASSWORD_DEFAULT);
+			$image = $this->profile;
 
 			$username_check = $this->isUserExist($username);
 
@@ -92,14 +95,15 @@
 				try 
 					{
 					
-						$sql = "INSERT INTO student(f_name,l_name,city,username,password)VALUES(:f_name,:l_name,:city,:username,:password)";
+						$sql = "INSERT INTO student(f_name,l_name,city,username,password,profile)VALUES(:f_name,:l_name,:city,:username,:password,:image)";
 						$stmt = $con->prepare($sql);
 						$stmt->execute([
 								'f_name'=>$f_name,
 								'l_name'=>$l_name,
 								'city'=>$city,
 								'username'=>$username,
-								'password'=>$hash
+								'password'=>$hash,
+								'image'=>$image
 						]);
 
 						return true;

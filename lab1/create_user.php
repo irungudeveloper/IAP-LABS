@@ -13,6 +13,14 @@
 		$username = $_POST['u_name'];
 		$password = $_POST['password'];
 
+		$image = $_FILES['profile']['name'];
+
+		$target_folder = "uploads/";
+
+		$target_file = $target_folder.basename($_FILES['profile']['name']);
+
+
+
 		if (empty($fname) || empty($lname) || empty($city) || empty($username) || empty($password)) 
 		{
 			echo '<script type="text/javascript">';
@@ -24,8 +32,9 @@
 				
 			$crud_object = new Crud;
 
-			$crud_object->getUserData($fname,$lname,$username,$password,$city);
+			$crud_object->getUserData($fname,$lname,$username,$password,$city,$image);
 			$crud_object->insertUser();
+			move_uploaded_file($_FILES['profile']['tmp_name'],$target_folder.$image);
 			
 		}
 		
@@ -46,7 +55,7 @@
  <div class="row p-0 m-0 bg-white justify-content-center m-2">
  	<div class="col-md-10">
  		
- 		<form name="create_user" action="create_user.php" method="POST" class="form jumbotron p-2 m-2" onsubmit="return validateForm()">
+ 		<form name="create_user" action="create_user.php" method="POST" class="form jumbotron p-2 m-2" onsubmit="return validateForm()" enctype="multipart/form-data">
 
 
 
@@ -66,6 +75,11 @@
  		<input type="password" name="password" class="form-control">
 
  		<br>
+
+ 		<label>Image Upload</label>
+		<input type="file" name="profile" class="form-control"/>
+
+		<br>
 
  		<input type="submit" name="submit" value="Insert" class="btn btn-primary p-2">
 
