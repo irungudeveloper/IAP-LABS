@@ -23,6 +23,11 @@
 		private $user_id;
 		private $profile;
 
+		// User timestamps,and offset
+
+		private $offset;
+		private $timestamp;
+
 		//Profile verification variables
 		private $img_size;
 		private $img_extension;
@@ -89,9 +94,11 @@
 		// End of verifying profile image
 		// --------------------------------------------------------------------------//
 
+		// Time zone setters and getters
+
 		// --------------------------------------------------------------------------//
 		// All CRUD operations for users
-		public function getUserData($fname,$lname,$username,$password,$city,$image)
+		public function getUserData($fname,$lname,$username,$password,$city,$image,$timestamp,$offset)
 		{
 			$this->fname = $fname;
 			$this->lname = $lname;
@@ -99,6 +106,8 @@
 			$this->password = $password;
 			$this->city = $city;
 			$this->profile = $image;
+			$this->offset = $offset;
+			$this->timestamp = $timestamp;
 		}
 
 		public function getUserID($id)
@@ -149,7 +158,7 @@
 			$username = $this->username;
 			$hash = password_hash($this->password, PASSWORD_DEFAULT);
 			$image = $this->profile;
-
+			
 			$username_check = $this->isUserExist($username);
 
 
@@ -159,7 +168,7 @@
 				try 
 					{
 					
-						$sql = "INSERT INTO student(f_name,l_name,city,username,password,profile)VALUES(:f_name,:l_name,:city,:username,:password,:image)";
+						$sql = "INSERT INTO student(f_name,l_name,city,username,password,profile,utc,offset)VALUES(:f_name,:l_name,:city,:username,:password,:image,:utc_time,:offset)";
 						$stmt = $con->prepare($sql);
 						$stmt->execute([
 								'f_name'=>$f_name,
@@ -167,7 +176,9 @@
 								'city'=>$city,
 								'username'=>$username,
 								'password'=>$hash,
-								'image'=>$image
+								'image'=>$image,
+								'utc_time'=>$this->timestamp,
+								'offset'=>$this->offset
 						]);
 
 						return true;

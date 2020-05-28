@@ -7,13 +7,22 @@
 	if (isset($_POST['submit']))
 	{
 
-//Variables for creating a user
+		echo $_POST['utc_timestamp'];
+		echo "<br>";
+		echo $_POST['time_zone_offset'];
+
+// Variables for creating a user
 
 		$fname = $_POST['fname'];
 		$lname = $_POST['lname'];
 		$city = $_POST['city'];
 		$username = $_POST['u_name'];
 		$password = $_POST['password'];
+
+// Timezone variables
+
+		$timestamp = $_POST['utc_timestamp'];
+		$offset = $_POST['time_zone_offset'];
 
 //Info about the profile image of the user
 		$image = $_FILES['profile']['name'];
@@ -37,9 +46,8 @@
 				
 			$crud_object = new Crud;
 
-			$crud_object->getUserData($fname,$lname,$username,$password,$city,$image);
+			$crud_object->getUserData($fname,$lname,$username,$password,$city,$image,$timestamp,$offset);
 			$crud_object->getImageDetails($image_size,$image_extension,$target_file);
-
 			$image_responses = array($crud_object->checkFileExists(),$crud_object->checkFileExtension(),$crud_object->checkFileSize() );
 
 			if (in_array('0', $image_responses)) 
@@ -107,6 +115,9 @@
 
 		<br>
 
+		<input type="hidden" name="utc_timestamp" id="utc_timestamp" value="">
+		<input type="hidden" name="time_zone_offset" id="time_zone_offset" value="">
+
  		<input type="submit" name="submit" value="Insert" class="btn btn-primary p-2">
 
  	</form>
@@ -116,6 +127,7 @@
  </div>
 
  <script type="text/javascript" src="js/authenticate.js"></script>	
+ <script type="text/javascript" src="js/timezone.js"></script>	
 
  </body>
  </html>
