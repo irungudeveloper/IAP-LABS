@@ -2,11 +2,10 @@
 
 	interface FileUpload
 	{
+		public function checkFileSize();
+		public function checkFileExtension();
+		public function checkFileExists();
 
-		public function correctFileSize();
-		public function correctFileType();
-		public function fileAlreadyExists();
-		
 	}
 
  ?>

@@ -3,14 +3,17 @@
 	require_once('database_class.php');
 	require_once('crud_interface.php');
 	require_once('authenticate.php');
+	require_once('file_interface.php');
 	/**
 	 * 
 	 */
-	class Crud extends Database implements CrudInterface,Authenticate
+	class Crud extends Database implements CrudInterface,Authenticate,FileUpload
 	{
+		//DB_Connection Variables
 		private $pdo;
 		private $connect;
 
+		//User Data Variables
 		private $fname;
 		private $lname;
 		private $username;
@@ -20,6 +23,11 @@
 		private $user_id;
 		private $profile;
 
+		//Profile verification variables
+		private $img_size;
+		private $img_extension;
+		private $img_path;
+
 		function __construct()
 		{
 			$this->pdo = new Database;
@@ -27,6 +35,62 @@
 			return $this->connect;
 		}
 
+
+		// --------------------------------------------------------------------------//
+		// Profile image verification functions -- Interface FileUpload
+
+		public function getImageDetails($size,$extension,$path)
+		{
+			$this->img_size = $size;
+			$this->img_extension = $extension;
+			$this->img_path = $path;
+		}
+
+		public function checkFileSize()
+		{
+			if ($this->img_size < 50000) 
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function checkFileExtension()
+		{
+
+			$accepted_extensions = array('jpeg','jpg','png');
+
+			if ( in_array($this->img_extension, $accepted_extensions) ) 
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public function checkFileExists()
+		{
+			if (!file_exists($this->img_path)) 
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+
+		// End of verifying profile image
+		// --------------------------------------------------------------------------//
+
+		// --------------------------------------------------------------------------//
+		// All CRUD operations for users
 		public function getUserData($fname,$lname,$username,$password,$city,$image)
 		{
 			$this->fname = $fname;
@@ -226,6 +290,11 @@
 
 		}
 
+		// END OF CRUD OPERATIONS ON THE USERS
+		// -----------------------------------------------------------------------------//
+		
+		//  Login functionalities of the USER
+		// -----------------------------------------------------------------------------//
 		public function loginUserDetails($username,$password)
 		{
 			$this->username = $username;
@@ -281,6 +350,12 @@
 			}
 		}
 
+		// END OF LOGIN FUNCTIONALITY
+		// ------------------------------------------------------------------------------//
+
 	}
+
+	// END OF CLASS USER
+	// ----------------------------------------------------------------------------------//
 
  ?>
