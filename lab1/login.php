@@ -39,8 +39,14 @@
 
 
  <?php require_once('layout.php') ?>
+
+ <div class="row p-0 m-0">
+ 	<div class="col-md-12">
+ 		<a href="create_user.php"><button class="btn btn-primary p-3 m-2 float-right">Create New User</button></a>
+ 	</div>
+ </div>
  
- <div class="row p-0 m-0 bg-white justify-content-center m-2">
+ <div class="row p-0 m-0 bg-white justify-content-center m-3 mt-5">
  		
  		<div class="col-md-10">
 

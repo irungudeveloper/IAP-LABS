@@ -14,6 +14,7 @@
  <div class="row p-0 m-0">
  	<div class="col-md-12">
  		<a href="create_user.php"><button class="btn btn-primary p-3 m-2 float-right">Create New User</button></a>
+ 		<a href="login.php"><button class="btn btn-primary p-3 m-2 pl-4 pr-4 float-right">Login</button></a>
  	</div>
  </div>
 
