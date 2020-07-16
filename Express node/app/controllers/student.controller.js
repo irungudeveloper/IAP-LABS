@@ -2,33 +2,30 @@ const Student = require("../models/student.model.js");
 
 //Create Student
 exports.create = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
 
-	if (!req.body) {
-		res.status(400).send({
-			message: "Content must not be empty"
-		});
-	}
+  // Create a Customer
+  const student = new Student({
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    birth_date:req.body.birth_date,
+    registration_date: req.body.registration_date
+  });
 
-	const student = new student({
-
-		first_name: req.body.first_name,
-		last_name: req.body.last_name,
-		birth_date: req.body.birth_date,
-		registration_date: req.body.registration_date
-
-	});
-
-	Student.create(student, (err, data) => {
-		if (err) 
-			res.status(500).send({
-				message:
-					err.message || "Some error occured while creating the record"
-			});
-		
-		else res.send(data);
-
-	});
-
+  // Save Student in the database
+  Student.create(student, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Customer."
+      });
+    else res.send(data);
+  });
 };
 
 //Display All Students
@@ -91,7 +88,7 @@ exports.update = (req, res) => {
 
 //Delete Sigle Student
 exports.delete = (req, res) => {
-	Student.remove(req.params.studentId, (err, data) => {
+  Student.remove(req.params.studentId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
