@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const port = process.env.PORT || 3000;
+const host = '0.0.0.0';
 
 //parse the requests of the content-type: app/json
 
@@ -21,8 +23,8 @@ app.get("/",(req, res)=>{
 
 require("./app/routes/student.routes.js")(app);
 
-app.listen(3000, ()=>{
+app.listen(port,host, ()=>{
 
-	console.log("Server running on port 3000");
+	console.log("Server running on port :"+port);
 
 });
