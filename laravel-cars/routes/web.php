@@ -21,4 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('/insert','insert');
 Route::post('/create','Cars@create');
-Route::get('/display','Cars@displayAll');
+Route::get('/display','Cars@displayAll')->name('display');
+Route::post('/delete/{id}','Cars@delete');
+Route::get('/edit/{id}','Cars@edit');
+Route::post('/update/{id}','Cars@update');

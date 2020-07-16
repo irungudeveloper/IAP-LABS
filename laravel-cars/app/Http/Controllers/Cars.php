@@ -32,12 +32,16 @@ class Cars extends Controller
 
 		]);
 
+		$imageName = time().'.'.$request->image->extension();  
+		
+
 		$car->make = $request->make;
 		$car->model = $request->model;
-		$car->image = $request->image;
+		$car->image = $imageName;
 		$car->year = $request->year;
 
 		$car->save();
+		$request->image->move(public_path('images'), $imageName);
 
 		return redirect()->route('display');
 
@@ -56,12 +60,16 @@ class Cars extends Controller
 	{
 		$car = Car::find($id);
 
+		$imageName = time().'.'.$request->image->extension();  
+		
+
 		$car->make = $request->make;
 		$car->model = $request->model;
-		// $car->image = $request->
+		$car->image = $imageName;
 		$car->year = $request->year;
 
 		$car->save();
+		$request->image->move(public_path('images'), $imageName);
 
 		return redirect()->route('display');
 
