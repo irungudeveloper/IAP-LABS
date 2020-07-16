@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended:true }));
 
 //Routes
 
-app.get("/student",(req, res)=>{
+app.get("/",(req, res)=>{
 
 	res.json({ message: "API running" });
 
