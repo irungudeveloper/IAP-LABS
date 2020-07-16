@@ -9,4 +9,4 @@ Testing
 To test this API, run the following routes on postman
 
 localhost:3000/api/v1/student (to get all students data)
-![alt text](https://github.com/irungudeveloper/IAP-LABS/Express node/blob/master/image.jpg?raw=true)
+![alt text](https://github.com/irungudeveloper/IAP-LABS/Express_node/blob/master/post_src.png?raw=true)
