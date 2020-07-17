@@ -17,4 +17,8 @@ class Car extends Model
     		'year'
 
     ];
+
+    public function reviews(){
+    	return $this->hasMany('App\Review','car_id');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Car;
+use App\Review;
 
 class Cars extends Controller
 {
@@ -82,6 +83,18 @@ class Cars extends Controller
 		$car->delete();
 
 		return redirect()->route('display');
+
+	}
+
+	public function displayReviewCar($id)
+	{
+		$review = Review::find($id);
+
+		$car_id = $review->car_id;
+
+		$car = Car::find($car_id);
+
+		return response($car);
 
 	}
 

@@ -25,3 +25,8 @@ Route::get('/display','Cars@displayAll')->name('display');
 Route::post('/delete/{id}','Cars@delete');
 Route::get('/edit/{id}','Cars@edit');
 Route::post('/update/{id}','Cars@update');
+Route::get('/insert/review', 'carReview@insert');
+Route::post('/create/review','carReview@create');
+Route::get('/display/review','carReview@displayAll')->name('display-review');
+Route::get('/car/review/{id}','carReview@displayCarReview');
+Route::get('/review/car/{id}','Cars@displayReviewCar');
