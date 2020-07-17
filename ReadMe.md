@@ -31,7 +31,7 @@ To test this API, run the following routes on postman
   
   BUGS: 
   
-  1.) No data pagiation
+  1.) No data pagination
   
   2.) The delete function returns a response on the console but not on PostMan
   
