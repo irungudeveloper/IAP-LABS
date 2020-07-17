@@ -1,17 +1,10 @@
 # IAP-LABS
 
-This Is A file that guides on the istallation and testing of the IAP LABS
+This repository contains all the IAP Semester labs and the Express API lab
 
-1.) PDO LABS
-The database sql file is in the database folder, import the file so as to use it with the application
-Place the files inside htdocs and run the index.php file and you'll be set
+1.) Lab 1-4 is contained in the **FOLDER 111841-Edwin-Irungu-lab-1-4**
 
-2.) Laravel lab
-Download the project to your local machine, create a database called cars.
-Run the database migrtions and run the command php artisan serve on command line
+2.) The laravel lab is contained in the **# FOLDER laravel-cars-111841-Edwin-Irungu**
 
-3.) Express Lab
-Download the project to your local machine. Import the file database.sql inside the database folder, run the routes on postman.
-
- The varibles used are first_name,last_name,birth_date,registration_date
+3.) The Express API code is contained in the **# BRANCH Express**
 
